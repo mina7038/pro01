@@ -1,0 +1,13 @@
+package com.br.app.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.br.app.entity.Member;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+		Optional<Member> findById(String id);   // 로그인체크용 (find = 찾을 경우)
+		boolean existsById(String id);    // 중복체크용 (exists = 존재 유무 판단)
+		Optional<Member> findByNo(Long no);
+}

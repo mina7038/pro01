@@ -1,0 +1,45 @@
+package com.br.app.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.br.app.entity.Product;
+import com.br.app.service.ProductService;
+
+@Controller
+@RequestMapping("/product")  // 공동 주소
+public class ProductController {
+	private final ProductService productService;
+	public ProductController(ProductService productService) {
+		this.productService = productService;
+	}
+	
+	@GetMapping("/list")
+	public String getAllList(Model model) {
+		model.addAttribute("products", productService.findAll());
+		return "product/list";
+	}
+	
+	@GetMapping("/detail/{no}")
+	public String getProduct(@PathVariable("no") Long no, Model model) {
+		model.addAttribute("product", productService.findById(no));
+		return "product/detail";
+	}
+	
+	@GetMapping("/ins")
+	public String ProductForm(Model model) {
+		model.addAttribute("product", new Product()); // 빈 껍데기 넣기
+		return "product-form";
+	}
+	
+	@PostMapping("/new")
+	public String insProduct() {
+		return "redirect:/product/list";
+	}
+	
+	
+}

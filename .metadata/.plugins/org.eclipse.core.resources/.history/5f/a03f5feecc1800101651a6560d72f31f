@@ -1,0 +1,17 @@
+package com.br.app.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.br.app.entity.Board;
+import com.br.app.entity.Qna;
+
+public interface QnaRepository extends JpaRepository<Qna, Long> {
+	List<Qna> findByLevel(int level);
+	List<Qna> findByParno(Long Parno);
+	List<Qna> findAllByOrderByParnoDescNoAsc();  // 정렬 => parno는 내림차순, no는 오름차순
+	List<Qna> deleteByParno(Long parno); // 질문 삭제(연쇄 삭제)
+	List<Qna> findTop3ByLevelAndOrderByResdateDesc(int level);
+	// select * from qna where level = 1 order by resdate desc LIMIT 3;
+}

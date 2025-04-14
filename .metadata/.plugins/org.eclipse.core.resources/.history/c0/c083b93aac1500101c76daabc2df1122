@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<title>오류 페이지</title>
+	<style>
+		.wrap {
+			background-image:url("/images/404.png");
+			background-repeat: no-repeat;
+			background-position:center center;
+			background-color:rgb(221, 238, 254);
+			width:100vw;
+			min-height:100vh;
+	}
+	</style>
+</head>
+
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>
+	<div class="wrap">
+	<hr>
+	<h4 style="text-align: center; margin-bottom:30px;">해당 요청을 처리할 수 없습니다</h4>
+	
+	<div class="btn-group" style="margin-top:50px; display:block; width:160px; margin:0 auto;">
+		<a href="/" class="btn btn-primary">메인으로 돌아가기</a>
+	</div>
+	
+</div>
+
+</body>
+
+</html>

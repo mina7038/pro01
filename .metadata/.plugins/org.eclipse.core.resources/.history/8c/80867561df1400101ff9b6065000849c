@@ -1,0 +1,37 @@
+package com.br.app.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.br.app.entity.Qna;
+import com.br.app.repository.QnaRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class QnaService {
+	private final QnaRepository qnaRepository;
+	// 목록 보기
+	public List<Qna> getAllQna(){
+		return qnaRepository.findAllByOrderByParnoDescNoAsc();
+	}
+	
+	public Qna findByNo(Long no) {
+		return qnaRepository.findById(no).orElse(null);
+	}
+	// 글쓰기
+	public Qna save(Qna qna) {
+		return qnaRepository.save(qna);
+	}
+	// 수정
+	public Qna upqdate(Qna qna) {
+		return qnaRepository.save(qna);
+	}
+	// 삭제
+	public void delete(Long no) {
+		qnaRepository.deleteById(no);
+	}
+	
+}

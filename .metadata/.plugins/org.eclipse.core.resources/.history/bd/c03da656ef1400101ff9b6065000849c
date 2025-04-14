@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<title>질문 및 답변</title>
+</head>
+
+<body>
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<div class="container">
+		
+	<hr>
+	<div>
+		배너
+	</div>
+	<div class="first-content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="/qna/list">질문 및 답변</a></li>
+				<li class="breadcrumb-item active" aria-current="page">목록</li>
+			</ol>
+		</nav>
+	</div>
+	</div>
+	<div class="container">
+		<h2 class="mt-4">질문 및 답변</h2>
+		<hr>
+		<a href="/qna/ins" class="btn btn-primary">질문 추가</a>
+		<hr>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="Qna : ${qnas}">
+					<td th:text="${qna.no}"></td>
+					<td><a th:text="${qna.title}" th:href="@{/qna/detail/{no}(no=${qna.no})}"></a></td>
+					<td th:text="${qna.author}"></td>
+					<td th:text="${qna.resdate}"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+	</div>
+</body>
+
+</html>

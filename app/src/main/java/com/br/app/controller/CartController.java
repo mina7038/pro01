@@ -1,0 +1,45 @@
+package com.br.app.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.br.app.entity.Cart;
+import com.br.app.service.CartService;
+
+@Controller
+public class CartController {
+	private final CartService cartService;
+	public CartController(CartService cartService) {
+		this.cartService = cartService;
+	}
+	
+	@GetMapping("/cart")	//상품 목록
+	public String showCart(Model model) {
+		model.addAttribute("cartList", cartService.findAll());
+        model.addAttribute("cart", new Cart());
+		return "cart";
+	}
+	
+	@PostMapping("/cart/add")
+    public String addItem(@ModelAttribute("cart") Cart cart) {
+        cartService.add(cart);
+        return "redirect:/cart";
+    }
+
+    @PostMapping("/cart/update/{cno}")
+    public String updateItem(@PathVariable Long cno, @RequestParam int amount) {
+        cartService.update(cno, amount);
+        return "redirect:/cart";
+    }
+
+    @PostMapping("/cart/delete/{cno}")
+    public String deleteItem(@PathVariable Long cno) {
+        cartService.delete(cno);
+        return "redirect:/cart";
+    }
+}

@@ -1,0 +1,49 @@
+package com.br.app.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.br.app.service.QnaService;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/qna")
+public class QnaController {
+	private final QnaService qnaService;
+	
+	@GetMapping("/list")
+	public String getAllQna(Model model) {
+		model.addAttribute("qnas", qnaService.getAllQna());
+		return "qna/list";
+	}
+	// 답글 상세보기
+	@GetMapping("/detail/{no}")
+	
+	// 질문 글 상세보기
+	@GetMapping("/question/{no}") // 해당 질문 글을 상세보기하면, 답변 글도 같이
+	
+	@GetMapping("/ins")
+	
+	// 글쓰기
+	@PostMapping("/new")
+	
+	// 답글쓰기
+	@PostMapping("/reply/{parno}")
+	
+	// 글 수정 폼 로딩
+	@GetMapping("/edit/{no}")
+	
+	// 글 수정 처리
+	@PostMapping("/update")
+	
+	// 해당 답글 삭제
+	@GetMapping("/reply/del/{no}")
+	
+	// 질문 삭제시 해당 답글도 연쇄 삭제
+	@GetMapping("/delete/{parno}")
+
+}

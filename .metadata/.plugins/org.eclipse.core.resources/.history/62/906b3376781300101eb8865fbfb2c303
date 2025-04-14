@@ -1,0 +1,5 @@
+package com.br.app.controller;
+
+public class MemberController {
+
+}

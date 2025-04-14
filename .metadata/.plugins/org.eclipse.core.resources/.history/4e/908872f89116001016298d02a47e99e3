@@ -1,0 +1,37 @@
+package com.br.app.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.br.app.entity.Cart;
+import com.br.app.repository.CartRepository;
+
+@Service
+public class CartService {
+	private final CartRepository cartRepository;
+
+	public CartService(CartRepository cartRepository) {
+		this.cartRepository = cartRepository;
+	}
+	
+		public List<Cart> getCart(){
+			return cartRepository.findAll();
+		}
+		// 제품 추가
+		public Cart add(Cart cart) {
+			return cartRepository.save(cart);
+		}
+		
+		// 제품 삭제
+		public void delete(Long no) {
+			cartRepository.deleteById(no);
+		}
+		
+		public Cart update(Long no, Cart updated) {
+			Cart cart = cartRepository.findById(no).orElseThrow();
+			cart.setAmount(updated.getAmount());
+	        return cartRepository.save(cart);
+		}
+		
+}

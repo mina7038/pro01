@@ -1,0 +1,17 @@
+package com.br.app.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.br.app.service.ProductService;
+
+@Controller
+@RequestMapping("/product")  // 공동 주소
+public class ProductController {
+	private final ProductService productService;
+	public ProductController(ProductService productService) {
+		this.productService = productService;
+	}
+	
+	
+}

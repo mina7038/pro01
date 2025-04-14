@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<title>질문 등록</title>
+</head>
+
+<body>
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<div class="container">
+	<hr>
+	<div>
+		배너
+	</div>
+	<div class="first-content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="/qna/list">질문 및 답변</a></li>
+				<li class="breadcrumb-item active" aria-current="page">질문 등록</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+	<div class="container">
+		<h2 class="mt-4">질문 등록</h2>
+		<hr>
+		<form th:action="@{/qna/save}" th:object="${qna}" method="post">
+			<div class="mb-3">
+				<label class="form-label">제목</label>
+				<input type="text" class="form-control" th:field="*{title}" textlength="80" required>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">내용</label>
+				<textarea rows="5" cols="80" class="form-control" th:field="*{content}" required></textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">작성자</label>
+				<div th:text="${member.id}"></div>
+			</div>
+			<div class="mb-3">
+
+			</div>
+			<button type="submit" class="btn btn-outline-success">등록</button>
+			<a href="/qna/list" class="btn btn-outline-primary">목록</a>
+		</form>
+	</div>
+	
+</body>
+
+</html>

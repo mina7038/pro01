@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>baskinrobbins</title>
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+</head>
+
+<body>
+
+
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<div id="carouselExample" class="carousel slide carousel-fade " data-bs-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img src="./images/peko.png" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="./images/greent.png" class="d-block w-100" alt="...">
+			</div>
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
+	<hr>
+	<div class="container">
+		<h2>신상품</h2>
+		<p>최근 등록한 상품 3건</p>
+		<ul class="list-group mb-4">
+			<li class="list-group-item" th:each="p : ${product}">
+				<strong th:text="${p.name}"></strong>
+			</li>
+		</ul>
+	</div>
+	<div class="container">
+		<h2>최근 게시글</h2>
+		<p>자유 게시판(board)에서 최근 게시글 3건</p>
+		<ul class="list-group mb-4">
+			<li class="list-group-item" th:each="b : ${board}">
+				<strong th:text="${b.title}">제목</strong>
+			</li>
+		</ul>
+	</div>
+	<div class="container">
+		<h2>최근 질문</h2>
+		<p>최근 질문 및 답변의 최근 질문만 3건</p>
+	</div>
+	<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+
+</html>

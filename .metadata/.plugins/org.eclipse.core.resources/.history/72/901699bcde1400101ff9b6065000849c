@@ -1,0 +1,13 @@
+package com.br.app.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.br.app.entity.Qna;
+
+public interface QnaRepository extends JpaRepository<Qna, Long> {
+	List<Qna> findByLevel(int level);
+	List<Qna> fomdByParno(Long Parno);
+	List<Qna> findAllByOrderByParnoDescNoASC();  // 정렬 => 질문은 내림차순, 
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<title>장바구니</title>
+</head>
+
+<body>
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<div class="container">
+		
+	<hr>
+	<div class="first-content">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="">회원</a></li>
+				<li class="breadcrumb-item active" aria-current="page">로그인</li>
+			</ol>
+		</nav>
+	</div>
+	<div class="container">
+		<h2 class="mt-4">장바구니</h2>
+		
+		<form th:action="@{/cart/add}" method="post">
+		    <input type="text" name="pname" placeholder="상품명" required>
+		    <input type="number" name="amount" value="1" required>
+		    <input type="number" name="price" value="1000" required>
+		    <button type="submit">추가</button>
+		  </form>
+
+		  <table>
+		    <thead>
+		      <tr>
+		        <th>ID</th>
+		        <th>상품명</th>
+		        <th>수량</th>
+		        <th>가격</th>
+		        <th>총액</th>
+		        <th>수정</th>
+		        <th>삭제</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr th:each="cart : ${cartList}">
+		        <td th:text="${cart.no}"></td>
+		        <td th:text="${cart.pname}"></td>
+		        <td>
+		          <form th:action="@{/cart/update/{no}(no=${cart.no})}" method="post">
+		            <input type="number" name="amount" th:value="${cart.amount}">
+		            <button type="submit">수정</button>
+		          </form>
+		        </td>
+		        <td th:text="${cart.price}"></td>
+		        <td th:text="${cart.price * cart.amount}"></td>
+		        <td>
+		          <form th:action="@{/cart/delete/{no}(no=${cart.no})}" method="post">
+		            <button type="submit">삭제</button>
+		          </form>
+		        </td>
+		      </tr>
+		    </tbody>
+		  </table>
+	</div>	
+</body>
+
+</html>
